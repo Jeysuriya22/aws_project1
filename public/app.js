@@ -1,11 +1,3 @@
-// AWS SDK configuration
-const AWS = require('aws-sdk');
-AWS.config.update({
-  region: 'us-east-1', // Replace with your AWS region
-});
-
-const s3 = new AWS.S3();
-
 // Expense tracker variables
 let monthlyBudget = 0;
 let expenses = [];
@@ -45,9 +37,6 @@ function addExpense() {
   expenseItem.innerHTML = `${expense.date} - ${expense.description} - $${expense.amount.toFixed(2)}`;
   expenseList.appendChild(expenseItem);
 
-  // Save expenses to the backend
-  saveExpensesToBackend();
-
   // Update the summary
   updateSummary();
 
@@ -66,42 +55,3 @@ function updateSummary() {
   document.getElementById("remaining-budget").textContent = remainingBudget.toFixed(2);
   document.getElementById("monthly-savings").textContent = monthlySavings.toFixed(2);
 }
-
-// Function to save expenses data to the backend
-function saveExpensesToBackend() {
-  fetch('/api/save-expenses', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(expenses),
-  })
-    .then(response => {
-      if (response.ok) {
-        console.log('Expenses saved to backend successfully');
-      } else {
-        console.error('Error saving expenses to backend');
-      }
-    })
-    .catch(err => console.error('Error:', err));
-}
-
-// Function to fetch expenses from the backend
-function fetchExpenses() {
-  fetch('/api/expenses')
-    .then(response => response.json())
-    .then(data => {
-      // Update the expense list on the frontend
-      const expenseList = document.getElementById("expense-list");
-      expenseList.innerHTML = ''; // Clear the list before adding new items
-      data.forEach(expense => {
-        const expenseItem = document.createElement("li");
-        expenseItem.innerHTML = `${expense.name} - $${expense.amount.toFixed(2)}`;
-        expenseList.appendChild(expenseItem);
-      });
-    })
-    .catch(error => console.error('Error fetching expenses:', error));
-}
-
-// Fetch expenses when the page loads
-window.onload = fetchExpenses;
