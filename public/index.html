@@ -1,1 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
+    <div class="container">
+        <h1>Expense Tracker</h1>
+        
+        <!-- Monthly Budget Section -->
+        <div class="budget-section">
+            <h2>Set Your Monthly Budget</h2>
+            <input type="number" id="monthly-budget" placeholder="Enter Budget" />
+            <button onclick="setBudget()">Set Budget</button>
+        </div>
+
+        <!-- Day-to-Day Expense Form -->
+        <div class="expense-form">
+            <h2>Enter Day-to-Day Expenses</h2>
+            <input type="date" id="expense-date" placeholder="Select Date">
+            <input type="text" id="expense-description" placeholder="Expense Description">
+            <input type="number" id="expense-amount" placeholder="Amount">
+            <button onclick="addExpense()">Add Expense</button>
+        </div>
+
+        <!-- Expense List -->
+        <h2>Expenses</h2>
+        <ul id="expense-list"></ul>
+
+        <!-- Summary Section -->
+        <div class="summary">
+            <h2>Monthly Summary</h2>
+            <p>Total Expenses: $<span id="total-expenses">0</span></p>
+            <p>Remaining Budget: $<span id="remaining-budget">0</span></p>
+            <p>Monthly Savings: $<span id="monthly-savings">0</span></p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
