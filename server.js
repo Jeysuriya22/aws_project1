@@ -1,16 +1,15 @@
 const express = require('express');
 const path = require('path');
-const AWS = require('aws-sdk');
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const bodyParser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 // AWS S3 configuration
-AWS.config.update({
+const s3 = new S3Client({
   region: 'us-east-1', // Replace with your AWS region
 });
-const s3 = new AWS.S3();
 
 // Middleware
 app.use(express.static(path.join(__dirname, 'public')));
@@ -28,7 +27,7 @@ app.get('/api/expenses', (req, res) => {
 });
 
 // API route to save expenses to S3
-app.post('/api/save-expenses', (req, res) => {
+app.post('/api/save-expenses', async (req, res) => {
   const expenses = req.body;
 
   if (!expenses || !Array.isArray(expenses)) {
@@ -43,15 +42,14 @@ app.post('/api/save-expenses', (req, res) => {
     ContentType: 'application/json',
   };
 
-  s3.upload(params, (err, data) => {
-    if (err) {
-      console.error('Error uploading to S3:', err);
-      res.status(500).send('Error saving expenses');
-    } else {
-      console.log('Expenses uploaded to S3 successfully:', data.Location);
-      res.status(200).send('Expenses saved to S3 successfully');
-    }
-  });
+  try {
+    const command = new PutObjectCommand(params);
+    await s3.send(command);
+    res.status(200).send('Expenses saved to S3 successfully');
+  } catch (err) {
+    console.error('Error uploading to S3:', err);
+    res.status(500).send('Error saving expenses');
+  }
 });
 
 // Handle all other routes by serving index.html
