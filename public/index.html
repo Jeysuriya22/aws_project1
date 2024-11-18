@@ -14,18 +14,22 @@
         <!-- Monthly Budget Section -->
         <div class="budget-section">
             <h2>Set Your Monthly Budget</h2>
-            <input type="number" id="monthly-budget" placeholder="Enter Budget" />
+            <label for="monthly-budget">Enter Budget:</label>
+            <input type="number" id="monthly-budget" placeholder="e.g., 1000" />
             <button onclick="setBudget()">Set Budget</button>
         </div>
 
         <!-- Day-to-Day Expense Form -->
-        <div class="expense-form">
+        <form id="expense-form">
             <h2>Enter Day-to-Day Expenses</h2>
-            <input type="date" id="expense-date" placeholder="Select Date">
-            <input type="text" id="expense-description" placeholder="Expense Description">
-            <input type="number" id="expense-amount" placeholder="Amount">
-            <button onclick="addExpense()">Add Expense</button>
-        </div>
+            <label for="expense-date">Date:</label>
+            <input type="date" id="expense-date" placeholder="Select Date" />
+            <label for="expense-description">Description:</label>
+            <input type="text" id="expense-description" placeholder="Expense Description" />
+            <label for="expense-amount">Amount:</label>
+            <input type="number" id="expense-amount" placeholder="e.g., 50" />
+            <button type="button" onclick="addExpense()">Add Expense</button>
+        </form>
 
         <!-- Expense List -->
         <h2>Expenses</h2>
