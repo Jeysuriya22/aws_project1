@@ -85,3 +85,23 @@ function saveExpensesToBackend() {
     })
     .catch(err => console.error('Error:', err));
 }
+
+// Function to fetch expenses from the backend
+function fetchExpenses() {
+  fetch('/api/expenses')
+    .then(response => response.json())
+    .then(data => {
+      // Update the expense list on the frontend
+      const expenseList = document.getElementById("expense-list");
+      expenseList.innerHTML = ''; // Clear the list before adding new items
+      data.forEach(expense => {
+        const expenseItem = document.createElement("li");
+        expenseItem.innerHTML = `${expense.name} - $${expense.amount.toFixed(2)}`;
+        expenseList.appendChild(expenseItem);
+      });
+    })
+    .catch(error => console.error('Error fetching expenses:', error));
+}
+
+// Fetch expenses when the page loads
+window.onload = fetchExpenses;
