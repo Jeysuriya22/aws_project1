@@ -1,0 +1,26 @@
+{
+    "name": "expense-tracker",
+    "version": "1.0.0",
+    "description": "A simple expense tracker app using Node.js and Express.",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.17.1"
+    },
+    "devDependencies": {},
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/your-username/expense-tracker.git"
+    },
+    "keywords": [
+      "expense",
+      "tracker",
+      "node.js",
+      "express"
+    ],
+    "author": "Your Name",
+    "license": "ISC"
+  }
+  
