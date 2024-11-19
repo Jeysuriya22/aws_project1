@@ -13,12 +13,12 @@ app.use(bodyParser.json());
 // Configure AWS SDK
 AWS.config.update({
   region: 'us-east-1', // Replace with your AWS region
-  accessKeyId: 'YOUR_AWS_ACCESS_KEY_ID', // Replace with your AWS access key
-  secretAccessKey: 'YOUR_AWS_SECRET_ACCESS_KEY', // Replace with your AWS secret key
+  accessKeyId: 'AKIAST6S7CZ3H5UYUBL5', // Replace with AKIAST6S7CZ3H5UYUBL5your AWS access key
+  secretAccessKey: 'Rk4BwvcblCaslCcGheDVzmL/VL9w53h2KR5LHeP8', // Replace with your AWS secret key
 });
 
 const s3 = new AWS.S3();
-const BUCKET_NAME = 'your-s3-bucket-name'; // Replace with your bucket name
+const BUCKET_NAME = 'my-expence-tracker'; // Replace with your bucket name
 
 // API route to upload expenses to S3
 app.post('/api/upload-expenses', (req, res) => {
