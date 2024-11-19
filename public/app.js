@@ -55,3 +55,25 @@ function updateSummary() {
   document.getElementById("remaining-budget").textContent = remainingBudget.toFixed(2);
   document.getElementById("monthly-savings").textContent = monthlySavings.toFixed(2);
 }
+// Function to upload expenses to S3
+async function uploadExpenses() {
+  try {
+    const response = await fetch('/api/upload-expenses', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(expenses),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      alert(`Expenses uploaded successfully! File URL: ${data.url}`);
+    } else {
+      const error = await response.json();
+      alert(`Failed to upload expenses: ${error.error}`);
+    }
+  } catch (error) {
+    console.error('Error uploading expenses:', error);
+    alert('An unexpected error occurred.');
+  }
+}
+
